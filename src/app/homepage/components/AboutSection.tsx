@@ -7,7 +7,7 @@ import Icon from '@/components/ui/AppIcon';
 const stats = [
 { num: '30+', label: 'Years of Experience', icon: 'ClockIcon' },
 { num: '5,000+', label: 'Families Secured', icon: 'UsersIcon' },
-{ num: '12+', label: 'Insurance Products', icon: 'DocumentCheckIcon' },
+{ num: '34+', label: 'Insurance Products', icon: 'DocumentCheckIcon' },
 { num: '₹500Cr+', label: 'Assets Under Advisory', icon: 'CurrencyRupeeIcon' }];
 
 
@@ -72,55 +72,54 @@ export default function AboutSection() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left: Image + floating badge */}
-          <div className="about-img-frame reveal-hidden relative">
-            <div className="rounded-3xl overflow-hidden shadow-sp-lg">
-              <AppImage
-                src="/assets/images/profile.jpg"
-                alt="Krupesh Nayee, Investment Advisor at Shree Pragya Insurance, in professional attire"
-                width={600}
-                height={520}
-                className="w-full h-[420px] md:h-[520px] object-cover" />
+          {/* Left: Interactive Info Card */}
+          <div className="reveal-hidden relative h-full flex flex-col items-center justify-center min-h-[420px] md:min-h-[520px] rounded-3xl overflow-hidden p-8 lg:p-12 shadow-sp-lg"
+            style={{
+              background: 'linear-gradient(135deg, #1a1a2e 0%, #27187E 100%)',
+              position: 'relative'
+            }}>
+            {/* Background design */}
+            <div className="absolute inset-0 opacity-20"
+              style={{
+                backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.8) 1px, transparent 0)',
+                backgroundSize: '32px 32px'
+              }}
+            />
+            {/* Gradient Orb */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#758BFD] rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#AEB8FE] rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse" style={{ animationDelay: '2s' }}></div>
+            
+            <div className="relative z-10 flex flex-col gap-6 w-full">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4"
+                style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)' }}>
+                <Icon name="SparklesIcon" size={32} className="text-[#AEB8FE]" />
+              </div>
               
-            </div>
-
-            {/* Floating experience badge */}
-            <div
-              className="absolute -bottom-6 -right-6 glass-card px-6 py-5 flex items-center gap-4"
-              style={{ borderRadius: '20px', minWidth: '200px' }}>
+              <h3 className="text-3xl md:text-4xl text-white font-display leading-tight" style={{ fontFamily: 'Plus Jakarta Sans', fontWeight: 800 }}>
+                Building Wealth,<br />
+                <span className="text-[#758BFD]">Securing Futures.</span>
+              </h3>
               
-              <div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
-                style={{ background: 'linear-gradient(135deg, #27187E, #758BFD)' }}>
+              <p className="text-[#AEB8FE] text-lg leading-relaxed mt-2" style={{ fontFamily: 'DM Sans' }}>
+                A legacy of over 3 decades in personalized financial planning, helping you navigate every life stage with confidence and clarity.
+              </p>
+              
+              <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-5 py-3 rounded-xl border border-white/20">
+                  <Icon name="ShieldCheckIcon" size={24} className="text-[#758BFD]" variant="solid" />
+                  <div>
+                    <p className="text-white font-semibold text-sm">IRDA Certified</p>
+                    <p className="text-white/60 text-xs text-left">Licensed Advisor</p>
+                  </div>
+                </div>
                 
-                <Icon name="StarIcon" size={26} variant="solid" className="text-white" />
-              </div>
-              <div>
-                <p className="font-display font-900 text-sp-primary text-2xl" style={{ fontFamily: 'Plus Jakarta Sans', fontWeight: 900 }}>
-                  Since 1990
-                </p>
-                <p className="text-[12px] text-sp-muted" style={{ fontFamily: 'DM Sans' }}>
-                  Trusted Advisor
-                </p>
-              </div>
-            </div>
-
-            {/* Floating certification badge */}
-            <div
-              className="absolute -top-4 -left-4 glass-card px-4 py-3 flex items-center gap-3"
-              style={{ borderRadius: '16px' }}>
-              
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: 'rgba(39,24,126,0.1)' }}>
-                
-                <Icon name="ShieldCheckIcon" size={20} variant="solid" className="text-sp-primary" />
-              </div>
-              <div>
-                <p className="text-[13px] font-semibold text-sp-primary" style={{ fontFamily: 'DM Sans' }}>
-                  IRDA Certified
-                </p>
-                <p className="text-[11px] text-sp-muted">Licensed Advisor</p>
+                <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-5 py-3 rounded-xl border border-white/20">
+                  <Icon name="StarIcon" size={24} className="text-[#758BFD]" variant="solid" />
+                  <div>
+                    <p className="text-white font-semibold text-sm">Since 1990</p>
+                    <p className="text-white/60 text-xs text-left">Trusted Excellence</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
