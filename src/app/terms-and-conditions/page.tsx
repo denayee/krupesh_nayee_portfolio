@@ -238,7 +238,7 @@ export default function TermsAndConditionsPage() {
               boxShadow: '0 4px 20px rgba(39,24,126,0.28)',
             }}
           >
-            ← Back to Home
+            Back to Home
           </Link>
         </div>
       </div>

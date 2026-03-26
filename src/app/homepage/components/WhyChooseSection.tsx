@@ -36,7 +36,7 @@ const pillars = [
     title: 'Complete Coverage',
     description:
       'From life insurance to car insurance, mutual funds to mediclaim — one advisor for all your financial protection needs, simplifying your financial life completely.',
-    stat: '12+',
+    stat: '34+',
     statLabel: 'Product Categories',
     color: '#27187E',
   },
