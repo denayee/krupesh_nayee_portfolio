@@ -8,7 +8,7 @@ const testimonials = [
 {
   name: 'Rajesh Mehta',
   role: 'Business Owner, Ahmedabad',
-  avatar: "https://img.rocket.new/generatedImages/rocket_gen_img_12b9c2bb3-1763293370864.png",
+  avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a",
   avatarAlt: 'Rajesh Mehta, middle-aged Indian businessman with short hair and confident expression',
   quote:
   'Krupesh bhai has been managing my family\'s insurance and investments for over 15 years. His advice on SIPs has helped us build a corpus we never thought possible. Truly trustworthy.',
@@ -19,7 +19,7 @@ const testimonials = [
 {
   name: 'Priya Desai',
   role: 'School Teacher, Surat',
-  avatar: "https://img.rocket.new/generatedImages/rocket_gen_img_178471507-1772439819553.png",
+  avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2",
   avatarAlt: 'Priya Desai, Indian woman teacher with warm smile and professional appearance',
   quote:
   'When my husband passed away, Shree Pragya Insurance handled all the claim paperwork with such care and efficiency. The term plan Krupesh had recommended was a lifesaver for our family.',
@@ -30,7 +30,7 @@ const testimonials = [
 {
   name: 'Vikram Patel',
   role: 'Software Engineer, Vadodara',
-  avatar: "https://img.rocket.new/generatedImages/rocket_gen_img_1f2277bfd-1763295470977.png",
+  avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
   avatarAlt: 'Vikram Patel, young Indian software professional with glasses and casual shirt',
   quote:
   'As a young professional, I was confused about where to start. Krupesh sir explained everything in simple terms — started my SIP, got mediclaim, and even a term plan. One advisor for everything!',
@@ -52,7 +52,7 @@ const testimonials = [
 {
   name: 'Suresh Kapoor',
   role: 'Retired Government Officer, Anand',
-  avatar: "https://img.rocket.new/generatedImages/rocket_gen_img_123682e34-1767527811620.png",
+  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
   avatarAlt: 'Suresh Kapoor, senior Indian man with grey hair and dignified expression',
   quote:
   'I was worried about my retirement income. Krupesh explained pension plans so clearly and helped me choose the right annuity. Now I have a steady monthly income without any stress.',
@@ -63,7 +63,7 @@ const testimonials = [
 {
   name: 'Ananya Shah',
   role: 'Doctor, Gandhinagar',
-  avatar: "https://img.rocket.new/generatedImages/rocket_gen_img_14f25c3ec-1763296096477.png",
+  avatar: "https://images.unsplash.com/photo-1594824436951-7f12bc4175de",
   avatarAlt: 'Ananya Shah, Indian female doctor in white coat with stethoscope',
   quote:
   'As a doctor, I understand risk. Krupesh sir helped me get comprehensive mediclaim, professional indemnity, and a solid mutual fund portfolio. Complete financial health!',

@@ -25,13 +25,7 @@ const nextConfig = {
   },
 
   webpack(config) {
-    config.module.rules.push({
-      test: /\.(jsx|tsx)$/,
-      exclude: [/node_modules/],
-      use: [{
-        loader: '@dhiwise/component-tagger/nextLoader',
-      }],
-    });
+    // Original dhiwise component-tagger loader removed to fix build errors
     return config;
   },
 };

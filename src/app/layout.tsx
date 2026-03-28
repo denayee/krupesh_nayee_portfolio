@@ -4,6 +4,8 @@ import '../styles/tailwind.css';
 import CookieConsent from '@/components/CookieConsent';
 import CustomCursor from '@/app/homepage/components/CustomCursor';
 import Preloader from '@/components/Preloader';
+import SmoothScroll from '@/components/SmoothScroll';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -28,14 +30,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <Preloader />
-        <CustomCursor />
-        {children}
-        <CookieConsent />
-        <script type="module" async src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fshreypragy4424back.builtwithrocket.new&_be=https%3A%2F%2Fappanalytics.rocket.new&_v=0.1.17" />
-        <script type="module" defer src="https://static.rocket.new/rocket-shot.js?v=0.0.2" /></body>
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <SmoothScroll>
+          <Preloader />
+          <CustomCursor />
+          {children}
+          <CookieConsent />
+          <SpeedInsights />
+        </SmoothScroll>
+      </body>
     </html>
   );
 }

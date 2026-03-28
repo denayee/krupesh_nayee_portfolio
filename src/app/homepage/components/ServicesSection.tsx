@@ -115,13 +115,43 @@ export default function ServicesSection() {
   const [activeService, setActiveService] = useState<Service>(services[0]);
   const [isPaused, setIsPaused] = useState(false);
   const [rotation, setRotation] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+  const [radius, setRadius] = useState(220); // Default server radius
+  const [containerSize, setContainerSize] = useState(560); // Default server size
+
   const animFrameRef = useRef<number>(0);
   const lastTimeRef = useRef<number>(0);
   const rotRef = useRef(0);
   const sectionRef = useRef<HTMLElement>(null);
 
+  // Handle client-side resizing safely to avoid hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+    const handleResize = () => {
+      const w = window.innerWidth;
+      if (w < 768) {
+        setRadius(130);
+        setContainerSize(320);
+      } else if (w < 1024) {
+        setRadius(170);
+        setContainerSize(440);
+      } else {
+        setRadius(220);
+        setContainerSize(560);
+      }
+    };
+    
+    // Set initial size
+    handleResize();
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Animate rotation
   useEffect(() => {
+    if (!isMounted) return;
+    
     const animate = (time: number) => {
       if (!isPaused) {
         const delta = lastTimeRef.current ? time - lastTimeRef.current : 0;
@@ -133,7 +163,7 @@ export default function ServicesSection() {
     };
     animFrameRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animFrameRef.current);
-  }, [isPaused]);
+  }, [isPaused, isMounted]);
 
   // Scroll reveal
   useEffect(() => {
@@ -158,7 +188,6 @@ export default function ServicesSection() {
   }, []);
 
   const count = services.length;
-  const radius = typeof window !== 'undefined' && window.innerWidth < 768 ? 130 : typeof window !== 'undefined' && window.innerWidth < 1024 ? 170 : 220;
 
   return (
     <section id="services" ref={sectionRef} className="py-24 md:py-32 px-6 md:px-12 relative overflow-hidden">
@@ -195,14 +224,13 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        {/* Orbit + Center Layout */}
         <div className="flex flex-col xl:flex-row items-center gap-16 xl:gap-24">
           {/* Orbit Spinner */}
           <div
-            className="orbit-container flex-shrink-0 reveal-hidden"
+            className="orbit-container flex-shrink-0 reveal-hidden transition-all duration-500 ease-out"
             style={{
-              width: typeof window !== 'undefined' && window.innerWidth < 768 ? '320px' : '560px',
-              height: typeof window !== 'undefined' && window.innerWidth < 768 ? '320px' : '560px',
+              width: `${containerSize}px`,
+              height: `${containerSize}px`,
             }}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
@@ -251,9 +279,8 @@ export default function ServicesSection() {
             {/* Orbit items */}
             {services.map((service, index) => {
               const angle = ((index / count) * 360 + rotation) * (Math.PI / 180);
-              const r = 220;
-              const x = Math.cos(angle) * r;
-              const y = Math.sin(angle) * r;
+              const x = Math.cos(angle) * radius;
+              const y = Math.sin(angle) * radius;
               const isActive = activeService.id === service.id;
 
               return (
@@ -266,7 +293,7 @@ export default function ServicesSection() {
                     top: '50%',
                     width: '64px',
                     height: '64px',
-                    transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                    transform: `translate(-50%, -50%) translate(${x.toFixed(3)}px, ${y.toFixed(3)}px)`,
                     transition: isPaused ? 'transform 0.3s ease' : 'none',
                     borderRadius: '50%',
                     background: isActive
