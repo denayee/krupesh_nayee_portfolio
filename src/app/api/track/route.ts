@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
+import { writeFile } from 'fs/promises';
 import { join } from 'path';
-import { existsSync } from 'fs';
+import os from 'os';
 
-const LOG_PATH = join(process.cwd(), 'visitors.log');
+const PRIMARY_LOG_PATH = join(process.cwd(), 'visitors.log');
+const FALLBACK_LOG_PATH = join(os.tmpdir(), 'visitors.log');
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,7 +22,17 @@ export async function POST(req: NextRequest) {
 
     const line = JSON.stringify(record) + '\n';
 
-    await writeFile(LOG_PATH, line, { flag: 'a', encoding: 'utf8' });
+    try {
+      // Primary static directory for dev
+      await writeFile(PRIMARY_LOG_PATH, line, { flag: 'a', encoding: 'utf8' });
+    } catch (fsError: any) {
+      // Vercel / Serverless throws EROFS on read-only system mounts
+      if (fsError.code === 'EROFS' || (fsError.message && fsError.message.includes('Read-only'))) {
+        await writeFile(FALLBACK_LOG_PATH, line, { flag: 'a', encoding: 'utf8' });
+      } else {
+        throw fsError;
+      }
+    }
 
     return NextResponse.json({ ok: true });
   } catch (err) {

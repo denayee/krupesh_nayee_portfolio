@@ -4,27 +4,36 @@ import AppLogo from '@/components/ui/AppLogo';
 import { promises as fs } from 'fs';
 import path from 'path';
 
+import os from 'os';
+
 async function getVisitorCount() {
-  try {
-    const logPath = path.join(process.cwd(), 'visitors.log');
-    const content = await fs.readFile(logPath, 'utf8');
-    const lines = content.split('\n').filter(line => line.trim().length > 0);
-    const uniqueIps = new Set();
-    
-    lines.forEach(line => {
-      try {
-        const data = JSON.parse(line);
-        if (data.ip) uniqueIps.add(data.ip);
-      } catch (e) {
-        // ignore invalid JSON
-      }
-    });
-    
-    return uniqueIps.size;
-  } catch (error) {
-    // Return 0 if file doesn't exist
-    return 0;
-  }
+  const uniqueIps = new Set();
+  
+  const processLogFile = async (logPath: string) => {
+    try {
+      const content = await fs.readFile(logPath, 'utf8');
+      const lines = content.split('\n').filter(line => line.trim().length > 0);
+      
+      lines.forEach(line => {
+        try {
+          const data = JSON.parse(line);
+          if (data.ip) uniqueIps.add(data.ip);
+        } catch (e) {
+          // ignore invalid JSON
+        }
+      });
+    } catch (error) {
+      // file doesn't exist or we can't read it
+    }
+  };
+
+  // 1. Read static repository file
+  await processLogFile(path.join(process.cwd(), 'visitors.log'));
+  
+  // 2. Read ephemeral serverless fallback file
+  await processLogFile(path.join(os.tmpdir(), 'visitors.log'));
+
+  return uniqueIps.size;
 }
 
 export default async function Footer() {
