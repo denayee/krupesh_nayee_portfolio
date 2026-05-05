@@ -5,6 +5,7 @@ import CookieConsent from '@/components/CookieConsent';
 import CustomCursor from '@/app/homepage/components/CustomCursor';
 import Preloader from '@/components/Preloader';
 import SmoothScroll from '@/components/SmoothScroll';
+import { Analytics } from '@vercel/analytics/next';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -36,6 +37,7 @@ export default function RootLayout({
           <CustomCursor />
           {children}
           <CookieConsent />
+          <Analytics />
         </SmoothScroll>
       </body>
     </html>
